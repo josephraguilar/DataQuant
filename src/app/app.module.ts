@@ -15,8 +15,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppComponent,
     MainNavComponent,
     SideNavComponent,
-    GraphDispComponent,
-    InfoDispComponent,
     InputFormComponent
   ],
   imports: [
