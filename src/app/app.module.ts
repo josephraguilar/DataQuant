@@ -9,7 +9,7 @@ import { InputFormComponent } from './input-form/input-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GraphComponent } from './graph/graph.component';
 import { InfoComponent } from './info/info.component';
-import{ MatDrawer } from '@angular/material';
+import{ MaterialModule } from './material';
 
 @NgModule({
   declarations: [
@@ -18,13 +18,13 @@ import{ MatDrawer } from '@angular/material';
     SideNavComponent,
     InputFormComponent,
     GraphComponent,
-    InfoComponent
+    InfoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatDrawer
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
