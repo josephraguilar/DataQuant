@@ -5,22 +5,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
-import { GraphDispComponent } from './graph-disp/graph-disp.component';
-import { InfoDispComponent } from './info-disp/info-disp.component';
 import { InputFormComponent } from './input-form/input-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GraphComponent } from './graph/graph.component';
+import { InfoComponent } from './info/info.component';
+import{ MatDrawer } from '@angular/material';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainNavComponent,
     SideNavComponent,
-    InputFormComponent
+    InputFormComponent,
+    GraphComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDrawer
   ],
   providers: [],
   bootstrap: [AppComponent]
