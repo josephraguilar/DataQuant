@@ -7,14 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./graph.component.scss',]
   
 })
-// export class GraphComponent implements OnInit {
 
-//   constructor() { }
-
-//   ngOnInit() {
-//   }
-
-// }
 
 export class GraphComponent {
   // lineChart
