@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,7 +10,7 @@ import { InputFormComponent } from './input-form/input-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GraphComponent } from './graph/graph.component';
 import { InfoComponent } from './info/info.component';
-import{ MaterialModule } from './material';
+import { MaterialModule } from './material';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,11 @@ import{ MaterialModule } from './material';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    ChartsModule,
+  ],
+  exports: [
+    ChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
