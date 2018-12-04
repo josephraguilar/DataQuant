@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainNavComponent implements OnInit {
 
-  constructor() { }
+  dataSets: Array<any> = [{}];
+
+  constructor() {
+    this.dataSets = [{
+      "name": "Taxes",
+      "index": 5
+    }, {
+      "name": "Population",
+      "index": 3,
+    }]
+   }
 
   ngOnInit() {
   }
 
+  addDataSet() {
+  }
 }
