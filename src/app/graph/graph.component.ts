@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {DataNavService} from "../data-nav.service";
 
 
 @Component({
@@ -113,3 +114,4 @@ export class GraphComponent {
   //   console.log(e);
   // }
 }
+
