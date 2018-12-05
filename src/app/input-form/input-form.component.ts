@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DataNavService} from "../data-nav.service";
 
 interface IChartData {
-  data:number;
+  data:Array<number>;
   label:string;
 }
 
@@ -15,10 +15,10 @@ interface IChartData {
 })
 
 export class InputFormComponent implements OnInit {
-
   newLabel: string;
-  newData: number;
-  dataSets: Array<any>;
+  newData: string;
+  dataSets: Array<IChartData>;
+  newDataArray: [number];
 
   constructor(private _dataNavService: DataNavService) {
     this._dataNavService.dataSetNames.subscribe(dataSetNames => {
@@ -26,25 +26,27 @@ export class InputFormComponent implements OnInit {
     });
     this.newData = null;
     this.newLabel = null;
-    this.dataSets = [];
+    this.newDataArray = [null];
   }
 
   async ngOnInit() {
   }
 
-  saveToLocalStorage() {
+  async saveToLocalStorage() {
+     let splitString: Array<string> = this.newData.split(",");
+     
+     for(let i=0; i < splitString.length; i++){ 
+       this.newDataArray[i] = parseInt(splitString[i])
+     }
+
     const newDataSet: IChartData = {
-      data: this.newData,
+      data: this.newDataArray,
       label: this.newLabel
     }
+    
     this.dataSets.unshift(newDataSet);
+
     this._dataNavService.dataSetNames.next(this.dataSets);
-    console.log(this._dataNavService.dataSetNames)
+    console.log("SAVED DATA   " + this.dataSets)
   }
-
-  async getItemsFromLocalStorage(key: string) {
-  }
-
-
-
 }

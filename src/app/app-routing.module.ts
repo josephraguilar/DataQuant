@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: "graph", component: GraphComponent },
   { path: "info", component: InfoComponent },
   { path: "inputform", component: InputFormComponent},
-  {path: "", component: GraphComponent}
+  { path: "", component: GraphComponent}
 ];
 
 @NgModule({

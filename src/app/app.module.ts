@@ -13,6 +13,7 @@ import { MaterialModule } from './material';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { GraphDisplayComponent } from './graph-display/graph-display.component';
 
 
 
@@ -24,6 +25,7 @@ import { AppRoutingModule } from './app-routing.module';
     InputFormComponent,
     GraphComponent,
     InfoComponent,
+    GraphDisplayComponent,
   ],
   imports: [
     BrowserModule,
