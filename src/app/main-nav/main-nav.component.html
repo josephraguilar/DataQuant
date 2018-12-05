@@ -1,12 +1,19 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <a routerLink="">  <button mat-icon-button color="white">
-            <mat-icon>home</mat-icon>
-          </button>
+        <a routerLink=""> <button mat-icon-button color="white">
+                <mat-icon>home</mat-icon>
+            </button>
         </a>
-        <a routerLink="">  <button mat-icon-button>
-            <mat-icon>add_box</mat-icon>
-          </button>
-        </a>
+        <ul>
+            <li *ngFor="let dataSet of dataSets"><a>
+                    <button mat-stroked-button color="accent">{{ dataSet.name }}</button>
+                </a></li>
+            <li>
+                <a routerLink="inputform"> <button mat-icon-button>
+                        <mat-icon>add_box</mat-icon>
+                    </button>
+                </a>
+            </li>
+        </ul>
     </mat-toolbar-row>
-    </mat-toolbar>
+</mat-toolbar>
