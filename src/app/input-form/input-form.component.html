@@ -1,11 +1,11 @@
 <div class="example-container">
     <mat-form-field>
-      <input matInput placeholder="Data Set Name">
+      <input [(ngModel)]="newLabel" matInput placeholder="Data Set Name">
     </mat-form-field>
   
     <mat-form-field>
-      <input matInput placeholder="Data">
+      <input [(ngModel)]="newData"  matInput placeholder="Data">
     </mat-form-field>
-    <button mat-stroked-button color="primary">Save</button>
+    <button (click)="saveToLocalStorage()" mat-stroked-button color="primary">Save</button>
   </div>
   

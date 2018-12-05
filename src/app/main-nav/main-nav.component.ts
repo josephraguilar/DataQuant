@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {DataNavService} from "../data-nav.service";
+
+
 
 @Component({
   selector: 'app-main-nav',
@@ -7,21 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainNavComponent implements OnInit {
 
-  dataSets: Array<any> = [{}];
+  dataSets: Array<any> = [];
 
-  constructor() {
-    this.dataSets = [{
-      "name": "Taxes",
-      "index": 5
-    }, {
-      "name": "Population",
-      "index": 3,
-    }]
-   }
-
-  ngOnInit() {
+  constructor(private _dataNavService: DataNavService) {
+    this._dataNavService.dataSetNames.subscribe(dataSetNames => {
+      this.dataSets = dataSetNames
+    });
   }
 
-  addDataSet() {
+  async ngOnInit() {
   }
 }

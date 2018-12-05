@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
@@ -11,6 +10,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GraphComponent } from './graph/graph.component';
 import { InfoComponent } from './info/info.component';
 import { MaterialModule } from './material';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+
+
 
 @NgModule({
   declarations: [
@@ -23,10 +27,12 @@ import { MaterialModule } from './material';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
     ChartsModule,
+    CommonModule,
+    FormsModule,
+    AppRoutingModule,
   ],
   exports: [
     ChartsModule,
