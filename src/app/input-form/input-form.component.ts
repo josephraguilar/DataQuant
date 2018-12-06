@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {DataNavService} from "../data-nav.service";
+import { DataNavService, IData, IDataSet } from "../data-nav.service";
+import { Subscription } from 'rxjs';
 
-interface IChartData {
-  data:number;
-  label:string;
-}
 
 
 
@@ -15,36 +12,54 @@ interface IChartData {
 })
 
 export class InputFormComponent implements OnInit {
-
+  dataSetName: string;
   newLabel: string;
-  newData: number;
-  dataSets: Array<any>;
+  newData: string;
+  dataSets: [IDataSet];
+  newDataArray: [number];
+  newSet: IDataSet;
+  xAxisInput: string;
+  xAxis: Array<string>;
 
   constructor(private _dataNavService: DataNavService) {
-    this._dataNavService.dataSetNames.subscribe(dataSetNames => {
-      this.dataSets = dataSetNames
-    });
+    this.xAxis = null;
+    this.dataSetName = null;
+    this.dataSets = null;
     this.newData = null;
     this.newLabel = null;
-    this.dataSets = [];
+    this.newDataArray = [null];
+    this._dataNavService.dataSets.subscribe(dataSets => {
+      this.dataSets = dataSets;
+    });
   }
 
-  async ngOnInit() {
+  ngOnInit() {
+    this._dataNavService.dataSets.subscribe(dataSets => {
+      this.dataSets = dataSets;
+    });
   }
 
-  saveToLocalStorage() {
-    const newDataSet: IChartData = {
-      data: this.newData,
+  saveToDataService() {
+    let splitString: Array<string> = this.newData.split(",");
+    for (let i = 0; i < splitString.length; i++) {
+      this.newDataArray[i] = parseInt(splitString[i])
+    }
+
+    this.xAxis = this.xAxisInput.split(",");
+
+    const newDataSet: IData = {
+      data: this.newDataArray,
       label: this.newLabel
     }
-    this.dataSets.unshift(newDataSet);
-    this._dataNavService.dataSetNames.next(this.dataSets);
-    console.log(this._dataNavService.dataSetNames)
+
+    this.newSet = {
+      data: newDataSet,
+      dataSetName: this.dataSetName,
+      xAxis: this.xAxis
+    }
+
+
+    this.dataSets.push(this.newSet);
+    this._dataNavService.emitData(this.dataSets);
   }
-
-  async getItemsFromLocalStorage(key: string) {
-  }
-
-
-
 }

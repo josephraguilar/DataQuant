@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DataNavService} from "../data-nav.service";
+import {DataNavService, IData, IDataSet} from "../data-nav.service";
 
 
 
@@ -10,11 +10,11 @@ import {DataNavService} from "../data-nav.service";
 })
 export class MainNavComponent implements OnInit {
 
-  dataSets: Array<any> = [];
+  dataSets: Array<IDataSet>;
 
   constructor(private _dataNavService: DataNavService) {
-    this._dataNavService.dataSetNames.subscribe(dataSetNames => {
-      this.dataSets = dataSetNames
+    this._dataNavService.dataSets.subscribe(dataSets => {
+      this.dataSets = dataSets;
     });
   }
 
