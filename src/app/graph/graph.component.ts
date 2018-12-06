@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataNavService } from "../data-nav.service";
+import { DataNavService, IData } from "../data-nav.service";
 
 
 @Component({
@@ -13,50 +13,16 @@ import { DataNavService } from "../data-nav.service";
 
 export class GraphComponent {
 
-  dataSets: Array<any>;
+
+  data: Array<any>;
+  dataSets: Array<IData>;
   dataSetLabels: Array<string>;
-  // lineChart
-  public lineChartData: Array<any> = [];
-  constructor(private _dataNavService: DataNavService) {
-  }
-
-  ngOnInit() {
-
-    this._dataNavService.dataSetNames.subscribe(dataSetNames => {
-      console.log('from graph component dataSetNames: ', dataSetNames);
-      this.dataSets = dataSetNames;
-      this.dataSetLabels = [];
-      this.dataSetLabels = this.dataSets;
-    });
-
-    for (let i = 0; i < this.dataSets.length; i++) {
-      this.dataSetLabels.push(this.dataSets[i].label)
-    }
-
-    const test = this.dataSets.map((item:any, i: number) => {
-      return item.label;
-    });
-    console.log(this.dataSets);
-    console.log(this.dataSetLabels)
-
-  }
-
-
-
-
-
-  // [
-  //   {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-  //   {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
-  //   {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
-  // ];
-
-
-  public lineChartLabels = this.dataSetLabels;
-  public lineChartOptions: any = {
+  public chartData: Array<IData> = [];
+  public chartLabels:Array<string> = [];
+  public lineChartOptions:any = {
     responsive: true
   };
-  public lineChartColors: Array<any> = [
+  public lineChartColors:Array<any> = [
     { // grey
       backgroundColor: 'rgba(148,159,177,0.2)',
       borderColor: 'rgba(148,159,177,1)',
@@ -82,74 +48,44 @@ export class GraphComponent {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ];
-  public lineChartLegend: boolean = true;
-  public lineChartType: string = 'line';
 
-  // public randomize():void {
-  //   let _lineChartData:Array<any> = new Array(this.lineChartData.length);
-  //   for (let i = 0; i < this.lineChartData.length; i++) {
-  //     _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
-  //     for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-  //       _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
-  //     }
-  //   }
-  //   this.lineChartData = _lineChartData;
-  // }
+  public lineChartLegend:boolean = true;
+  public lineChartType:string = 'line';
 
-  //bar chart
-  public barChartOptions: any = {
-    scaleShowVerticalLines: false,
-    responsive: true
-  };
-  public barChartLabels: string[] = this.lineChartLabels
-  // ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType: string = 'bar';
-  public barChartLegend: boolean = true;
 
-  public barChartData: any[] = this.lineChartData;
 
-  // [
-  //   {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-  //   {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-  // ];
 
-  // events
-  public chartClicked(e: any): void {
-    console.log(e);
+
+   constructor(private _dataNavService: DataNavService) {
+    this.dataSets =null;
+    this._dataNavService.dataSets.subscribe(dataSets => {
+      this.chartData = dataSets.data;
+      this.data = dataSets.map((item:any, i: number) => {
+        return item.data;
+      });
+      this.chartLabels = this.data.map((item:any, i: number) => {
+        return item.label;
+      });
+      
+
+
+    });
+    
+    
+
   }
 
-  public chartHovered(e: any): void {
-    console.log(e);
+
+
+  ngOnInit() {
+    this._dataNavService.dataSets.subscribe(dataSets => {
+      // console.log('from graph component dataSetNames: ', dataSets);
+      // console.log('from graph component chart labels  ' + this.chartLabels);
+    });
+
+
+
   }
 
-  // public randomize():void {
-  //   // Only Change 3 values
-  //   let data = [
-  //     Math.round(Math.random() * 100),
-  //     59,
-  //     80,
-  //     (Math.random() * 100),
-  //     56,
-  //     (Math.random() * 100),
-  //     40];
-  //   let clone = JSON.parse(JSON.stringify(this.barChartData));
-  //   clone[0].data = data;
-  //   this.barChartData = clone;
-  //   /**
-  //    * (My guess), for Angular to recognize the change in the dataset
-  //    * it has to change the dataset variable directly,
-  //    * so one way around it, is to clone the data, change it and then
-  //    * assign it;
-  //    */
-  // }
-
-  // events
-  // public chartClicked(e:any):void {
-  //   console.log(e);
-  // }
-
-  // public chartHovered(e:any):void {
-  //   console.log(e);
-  // }
 }
 

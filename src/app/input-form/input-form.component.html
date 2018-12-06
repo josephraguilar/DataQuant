@@ -1,11 +1,17 @@
 <div class="example-container">
+
+  <mat-form-field>
+    <input [(ngModel)]="dataSetName" matInput placeholder="Data Set Name">
+  </mat-form-field>
+
+  <div>
     <mat-form-field>
-      <input [(ngModel)]="newLabel" matInput placeholder="Data Set Name">
+      <input [(ngModel)]="newLabel" matInput placeholder="Series Label">
     </mat-form-field>
-  
+
     <mat-form-field>
-      <input [(ngModel)]="newData"  matInput placeholder="Data">
+      <input [(ngModel)]="newData" matInput placeholder="Series Data">
     </mat-form-field>
-    <button (click)="saveToLocalStorage()" mat-stroked-button color="primary" routerLink="/graph">Save</button>
   </div>
-  
+  <button (click)="saveToDataService()" mat-stroked-button color="primary" routerLink="/graph">Save</button>
+</div>

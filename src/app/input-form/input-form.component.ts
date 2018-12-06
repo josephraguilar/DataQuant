@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {DataNavService} from "../data-nav.service";
+import { DataNavService, IData, IDataSet } from "../data-nav.service";
+import { Subscription } from 'rxjs';
 
-interface IChartData {
-  data:Array<number>;
-  label:string;
-}
 
 
 
@@ -15,38 +12,48 @@ interface IChartData {
 })
 
 export class InputFormComponent implements OnInit {
+  dataSetName: string;
   newLabel: string;
   newData: string;
-  dataSets: Array<IChartData>;
+  dataSets: [IDataSet];
   newDataArray: [number];
+  newSet: IDataSet;
 
   constructor(private _dataNavService: DataNavService) {
-    this._dataNavService.dataSetNames.subscribe(dataSetNames => {
-      this.dataSets = dataSetNames
-    });
+    this.dataSetName = null;
+    this.dataSets = null;
     this.newData = null;
     this.newLabel = null;
     this.newDataArray = [null];
+    this._dataNavService.dataSets.subscribe(dataSets => {
+      this.dataSets = dataSets;
+    });
   }
 
-  async ngOnInit() {
+  ngOnInit() {
+    this._dataNavService.dataSets.subscribe(dataSets => {
+      this.dataSets = dataSets;
+    });
   }
 
-  async saveToLocalStorage() {
-     let splitString: Array<string> = this.newData.split(",");
-     
-     for(let i=0; i < splitString.length; i++){ 
-       this.newDataArray[i] = parseInt(splitString[i])
-     }
+  saveToDataService() {
+    let splitString: Array<string> = this.newData.split(",");
+    for (let i = 0; i < splitString.length; i++) {
+      this.newDataArray[i] = parseInt(splitString[i])
+    }
 
-    const newDataSet: IChartData = {
+    const newDataSet: IData = {
       data: this.newDataArray,
       label: this.newLabel
     }
-    
-    this.dataSets.unshift(newDataSet);
 
+    this.newSet = {
+      data: newDataSet,
+      dataSetName: this.dataSetName
+    }
+
+
+    this.dataSets.push(this.newSet);
     this._dataNavService.emitData(this.dataSets);
-    console.log("SAVED DATA   " + this.dataSets)
   }
 }
