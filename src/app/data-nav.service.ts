@@ -7,6 +7,7 @@ export interface IData {
 export interface IDataSet {
   data: IData;
   dataSetName: string;
+  xAxis: Array<string>
 }
 
 @Injectable({

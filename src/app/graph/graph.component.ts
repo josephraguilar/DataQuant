@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DataNavService, IData } from "../data-nav.service";
+import { Chart } from 'chart.js'
+
 
 
 @Component({
@@ -12,80 +14,76 @@ import { DataNavService, IData } from "../data-nav.service";
 
 
 export class GraphComponent {
+  @ViewChild('myCanvas') myCanvas: ElementRef;
+  @ViewChild('myCanvas2') myCanvas2: ElementRef;
 
+  public context: CanvasRenderingContext2D;
+  public context2: CanvasRenderingContext2D;
+  myChart: any;
+  chartSeries: Array<any>
+  chartData: Array<any>;
+  chartLabel: string;
+  chart1: any;
+  chart2: any;
 
-  data: Array<any>;
-  dataSets: Array<IData>;
-  dataSetLabels: Array<string>;
-  public chartData: Array<IData> = [];
-  public chartLabels:Array<string> = [];
-  public lineChartOptions:any = {
-    responsive: true
-  };
-  public lineChartColors:Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    }
-  ];
-
-  public lineChartLegend:boolean = true;
-  public lineChartType:string = 'line';
-
-
-
-
-
-   constructor(private _dataNavService: DataNavService) {
-    this.dataSets =null;
-    this._dataNavService.dataSets.subscribe(dataSets => {
-      this.chartData = dataSets.data;
-      this.data = dataSets.map((item:any, i: number) => {
-        return item.data;
-      });
-      this.chartLabels = this.data.map((item:any, i: number) => {
-        return item.label;
-      });
-      
-
-
-    });
-    
-    
-
+  constructor(private _dataNavService: DataNavService) {
   }
-
 
 
   ngOnInit() {
     this._dataNavService.dataSets.subscribe(dataSets => {
-      // console.log('from graph component dataSetNames: ', dataSets);
-      // console.log('from graph component chart labels  ' + this.chartLabels);
-    });
+      this.chartData = dataSets.map((item: any, i: number) => {
+        return item.data.data;
+      });
+      this.chartLabel = dataSets.map((item: any, i: number) => {
+        return item.data.label;
+      });
+      this.chartSeries = dataSets.map((item: any, i: number) => {
+        return item.xAxis;
+      });
 
 
+      if (this.chartData.length > 0) {
+        // FIRST CHART
+        this.context = (<HTMLCanvasElement>this.myCanvas.nativeElement).getContext('2d');
+        this.chart1 = new Chart(this.context, {
+          // The type of chart we want to create
+          type: 'line',
+          // The data for our dataset
+          data: {
+            labels: this.chartSeries[0],
+            datasets: [{
+              label: this.chartLabel[0],
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: this.chartData[0],
+            }]
+          },
+          // Configuration options go here
+          options: {}
+        });
 
+        // SECOND CHART
+        this.context2 = (<HTMLCanvasElement>this.myCanvas2.nativeElement).getContext('2d');
+        this.chart2 = new Chart(this.context2, {
+          // The type of chart we want to create
+          type: 'bar',
+
+          // The data for our dataset
+          data: {
+            labels: this.chartSeries[0],
+            datasets: [{
+              label: this.chartLabel[0],
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: this.chartData[0],
+            }]
+          },
+          // Configuration options go here
+          options: {}
+        });
+      };
+    })
   }
-
 }
 

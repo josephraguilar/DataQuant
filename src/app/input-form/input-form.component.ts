@@ -18,8 +18,11 @@ export class InputFormComponent implements OnInit {
   dataSets: [IDataSet];
   newDataArray: [number];
   newSet: IDataSet;
+  xAxisInput: string;
+  xAxis: Array<string>;
 
   constructor(private _dataNavService: DataNavService) {
+    this.xAxis = null;
     this.dataSetName = null;
     this.dataSets = null;
     this.newData = null;
@@ -42,6 +45,8 @@ export class InputFormComponent implements OnInit {
       this.newDataArray[i] = parseInt(splitString[i])
     }
 
+    this.xAxis = this.xAxisInput.split(",");
+
     const newDataSet: IData = {
       data: this.newDataArray,
       label: this.newLabel
@@ -49,7 +54,8 @@ export class InputFormComponent implements OnInit {
 
     this.newSet = {
       data: newDataSet,
-      dataSetName: this.dataSetName
+      dataSetName: this.dataSetName,
+      xAxis: this.xAxis
     }
 
 

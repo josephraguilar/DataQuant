@@ -4,14 +4,23 @@
     <input [(ngModel)]="dataSetName" matInput placeholder="Data Set Name">
   </mat-form-field>
 
-  <div>
+  <div class="series-entry">
     <mat-form-field>
       <input [(ngModel)]="newLabel" matInput placeholder="Series Label">
     </mat-form-field>
 
     <mat-form-field>
-      <input [(ngModel)]="newData" matInput placeholder="Series Data">
+      <textarea [(ngModel)]="newData" matInput placeholder="Series Data"></textarea>
     </mat-form-field>
   </div>
+  <button mat-stroked-button color="primary">Add Series</button>
+
+  <div class="x-axis-input">
+      <mat-form-field>
+          <input [(ngModel)]="xAxisInput" matInput placeholder="X Axis Units">
+        </mat-form-field>
+  </div>
+
+
   <button (click)="saveToDataService()" mat-stroked-button color="primary" routerLink="/graph">Save</button>
 </div>
