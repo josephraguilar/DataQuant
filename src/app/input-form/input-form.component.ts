@@ -46,7 +46,7 @@ export class InputFormComponent implements OnInit {
     
     this.dataSets.unshift(newDataSet);
 
-    this._dataNavService.dataSetNames.next(this.dataSets);
+    this._dataNavService.emitData(this.dataSets);
     console.log("SAVED DATA   " + this.dataSets)
   }
 }

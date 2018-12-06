@@ -1,9 +1,20 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {Subject} from 'rxjs';
+
+export interface IData {
+  data: Array<number> | number;
+  label: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataNavService {
-  dataSetNames:BehaviorSubject<Array<any>> = new BehaviorSubject<Array<any>>([]);
+  dataSetNames:Subject<Array<IData>> = new Subject<Array<IData>>();
+
+  constructor() {}
+
+  emitData(data: Array<IData>) {
+    this.dataSetNames.next(data);
+  }
 }

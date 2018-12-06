@@ -15,18 +15,27 @@ export class GraphComponent {
 
   dataSets: Array<any>;
   dataSetLabels: Array<string>;
-
+  // lineChart
+  public lineChartData: Array<any> = [];
   constructor(private _dataNavService: DataNavService) {
-    this._dataNavService.dataSetNames.subscribe(dataSetNames => {
-      this.dataSets = dataSetNames;
-      this.dataSetLabels = [];
-    });
   }
 
   ngOnInit() {
-      for (let i = 0; i < this.dataSets.length; i++) {
+
+    this._dataNavService.dataSetNames.subscribe(dataSetNames => {
+      console.log('from graph component dataSetNames: ', dataSetNames);
+      this.dataSets = dataSetNames;
+      this.dataSetLabels = [];
+      this.dataSetLabels = this.dataSets;
+    });
+
+    for (let i = 0; i < this.dataSets.length; i++) {
       this.dataSetLabels.push(this.dataSets[i].label)
     }
+
+    const test = this.dataSets.map((item:any, i: number) => {
+      return item.label;
+    });
     console.log(this.dataSets);
     console.log(this.dataSetLabels)
 
@@ -34,9 +43,7 @@ export class GraphComponent {
 
 
 
-  // lineChart
-  public lineChartData: Array<any> =
-    this.dataSets;
+
 
   // [
   //   {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
