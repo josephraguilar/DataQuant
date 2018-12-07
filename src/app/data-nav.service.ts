@@ -18,9 +18,16 @@ export interface IDataSet {
 
 export class DataNavService {
   dataSets:BehaviorSubject<any> = new BehaviorSubject<any>([]);
-  constructor() {}
+  constructor() {
+    
+  }
 
   emitData(data: Array<IDataSet>) {
     this.dataSets.next(data);
+    localStorage.setItem('dataSets', (JSON.stringify(data)));
+    console.log(JSON.parse(localStorage.getItem('dataSets')));
+  }
+
+  ngOnInit() {
   }
 }

@@ -20,4 +20,10 @@ export class MainNavComponent implements OnInit {
 
   async ngOnInit() {
   }
+
+  deleteDataSet(index: number) {
+    console.log(index);
+    this.dataSets.splice(index,1);
+    this._dataNavService.emitData(this.dataSets);
+  }
 }
