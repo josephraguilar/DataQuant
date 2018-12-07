@@ -5,9 +5,10 @@
             </button>
         </a>
         <ul>
-            <li *ngFor="let dataSet of dataSets"><a>
-                    <button mat-stroked-button color="accent">{{dataSet.dataSetName}}</button>
-                </a></li>
+            <li *ngFor="let dataSet of dataSets; let i = index">
+                <a><button mat-stroked-button color="accent">{{dataSet.dataSetName}}</button></a>
+                <a><i (click)="deleteDataSet(i)" class="material-icons">clear</i></a>
+            </li>
             <li>
                 <a routerLink="inputform"> <button mat-icon-button>
                         <mat-icon>add_box</mat-icon>
