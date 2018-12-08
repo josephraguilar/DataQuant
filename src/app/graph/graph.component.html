@@ -1,15 +1,6 @@
-<mat-tab-group mat-align-tabs="center">
-  <mat-tab label="Line Graph">
+<h1> {{  this.dataSetName }} </h1>
 
-  <div>
-    <canvas #myCanvas>{{ chart }}</canvas>
-  </div>
-  
+  <div label="Line Graph">
+    <canvas #myCanvas id='myCanvas'>{{ chart }}</canvas>
+</div>
 
-  </mat-tab>
-  <mat-tab  label="Bar Chart">
-
-      <canvas #myCanvas2> {{ chart }} </canvas>
-
-  </mat-tab>
-</mat-tab-group>
