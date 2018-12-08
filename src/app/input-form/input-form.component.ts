@@ -59,7 +59,7 @@ export class InputFormComponent implements OnInit {
     }
 
 
-    this.dataSets.push(this.newSet);
+    this.dataSets.unshift(this.newSet);
     this._dataNavService.emitData(this.dataSets);
   }
 }

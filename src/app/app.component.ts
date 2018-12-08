@@ -9,11 +9,13 @@ import { DataNavService, IData, IDataSet } from "./data-nav.service";
 })
 export class AppComponent {
   title = 'dataquant';
-
   dataSets: Array<any>;
+  activeSet: any;
 
   constructor(private _dataNavService: DataNavService) {
-    
+    this._dataNavService.activeDataSet.subscribe( activeDataSet => {
+      this.activeSet = activeDataSet
+    })
   }
 
   ngOnInit() {

@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-
 import { AppComponent } from './app.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
@@ -13,7 +12,6 @@ import { MaterialModule } from './material';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { GraphDisplayComponent } from './graph-display/graph-display.component';
 
 
 
@@ -24,8 +22,7 @@ import { GraphDisplayComponent } from './graph-display/graph-display.component';
     SideNavComponent,
     InputFormComponent,
     GraphComponent,
-    InfoComponent,
-    GraphDisplayComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,
