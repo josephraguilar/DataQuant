@@ -13,7 +13,7 @@ export class InfoComponent implements OnInit, DoCheck {
   activeSet: number;
   public context2: CanvasRenderingContext2D;
   myChart: any;
-  chartSeries: Array<any>
+  chartxAxis: Array<any>
   chartData: Array<any>;
   chartLabel: Array<string>;
   chart2: any;
@@ -33,7 +33,7 @@ export class InfoComponent implements OnInit, DoCheck {
     this.chartLabel = dataSets.map((item: any, i: number) => {
       return item.data.label;
     });
-    this.chartSeries = dataSets.map((item: any, i: number) => {
+    this.chartxAxis = dataSets.map((item: any, i: number) => {
       return item.xAxis;
     });
   })
@@ -59,7 +59,7 @@ export class InfoComponent implements OnInit, DoCheck {
     type: 'bar',
     // The data for our dataset
     data: {
-      labels: this.chartSeries[this.activeSet],
+      labels: this.chartxAxis[this.activeSet],
       datasets: [{
         label: this.chartLabel[this.activeSet],
         backgroundColor: 'rgb(255, 99, 132)',

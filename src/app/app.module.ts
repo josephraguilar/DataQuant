@@ -8,6 +8,7 @@ import { InputFormComponent } from './input-form/input-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GraphComponent } from './graph/graph.component';
 import { InfoComponent } from './info/info.component';
+import { HistogramComponent } from './histogram/histogram.component';
 import { MaterialModule } from './material';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -22,7 +23,8 @@ import { AppRoutingModule } from './app-routing.module';
     SideNavComponent,
     InputFormComponent,
     GraphComponent,
-    InfoComponent
+    InfoComponent,
+    HistogramComponent,
   ],
   imports: [
     BrowserModule,
