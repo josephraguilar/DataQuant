@@ -25,8 +25,8 @@ export class GraphComponent implements DoCheck {
 
 
   constructor(private _dataNavService: DataNavService) {
-     this._dataNavService.activeDataSet.subscribe(activeDataSet => {
-       this.activeSet = activeDataSet;
+    this._dataNavService.activeDataSet.subscribe(activeDataSet => {
+      this.activeSet = activeDataSet;
       this.changer = null;
     })
 
@@ -72,14 +72,18 @@ export class GraphComponent implements DoCheck {
         labels: this.chartxAxis[this.activeSet],
         datasets: [{
           label: this.chartLabel[this.activeSet],
-          backgroundColor: 'rgb(255, 99, 132)',
-          borderColor: 'rgb(255, 99, 132)',
+          backgroundColor: 'rgba(148,159,177,0.2)',
+          borderColor: 'rgba(148,159,177,1)',
+          pointBackgroundColor: 'rgba(148,159,177,1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(148,159,177,0.8)',
           data: this.chartData[this.activeSet],
         }]
       },
       // Configuration options go here
       options: {
-        
+
       }
     });
   }
