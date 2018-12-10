@@ -15,7 +15,7 @@ export class InputFormComponent implements OnInit {
   dataSetName: string;
   newLabel: string;
   newData: string;
-  dataSets: [IDataSet];
+  dataSets: Array<any>;
   newDataArray: [number];
   newSet: IDataSet;
   xAxisInput: string;
@@ -24,7 +24,7 @@ export class InputFormComponent implements OnInit {
   constructor(private _dataNavService: DataNavService) {
     this.xAxis = null;
     this.dataSetName = null;
-    this.dataSets = null;
+    this.dataSets = [];
     this.newData = null;
     this.newLabel = null;
     this.newDataArray = [null];

@@ -15,15 +15,19 @@ export interface IDataSet {
 })
 
 export class DataNavService {
-  dataSets:BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  dataSets:BehaviorSubject<any> = new BehaviorSubject<any>([0]);
   activeDataSet:BehaviorSubject<any> = new BehaviorSubject([0]);
   constructor() {
   }
 
   emitData(data: Array<IDataSet>) {
     this.dataSets.next(data);
+    if (data != null) {
     localStorage.setItem('dataSets', (JSON.stringify(data)));
     console.log(JSON.parse(localStorage.getItem('dataSets')));
+    } else {
+      localStorage.setItem('dataSets', (JSON.stringify([])));
+    };
   }
 
   activateSet(index: number) {

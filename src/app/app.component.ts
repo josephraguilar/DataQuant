@@ -11,6 +11,7 @@ export class AppComponent {
   title = 'dataquant';
   dataSets: Array<any>;
   activeSet: any;
+  localData: any;
 
   constructor(private _dataNavService: DataNavService) {
     this._dataNavService.activeDataSet.subscribe( activeDataSet => {
@@ -19,9 +20,19 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.dataSets = JSON.parse(localStorage.getItem('dataSets'));
-    this._dataNavService.emitData(this.dataSets);
+    this.fetchData();
 
+    if (this.localData != null) { 
+    this.dataSets = this.localData
+    this._dataNavService.emitData(this.dataSets);
+    } else {
+      this._dataNavService.emitData([]);
+    }
+
+  }
+
+  fetchData() {
+    this.localData = JSON.parse(localStorage.getItem('dataSets'));
   }
 }
 
