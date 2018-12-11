@@ -15,6 +15,13 @@ i:hover {
     color: #e577b3;
 }
 
+.home-icon {
+    padding-right: 15px;
+}
+
+.mat-button.mat-accent, .mat-icon-button.mat-accent, .mat-stroked-button.mat-accent {
+    color: #ffffff !important;
+}
 // button:focus {
 //     background: white;
 // }

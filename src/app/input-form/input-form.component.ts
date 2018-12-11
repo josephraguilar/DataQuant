@@ -12,10 +12,11 @@ import { Subscription } from 'rxjs';
 })
 
 export class InputFormComponent implements OnInit {
+  randomSet: IData;
   dataSetName: string;
   newLabel: string;
   newData: string;
-  dataSets: [IDataSet];
+  dataSets: Array<any>;
   newDataArray: [number];
   newSet: IDataSet;
   xAxisInput: string;
@@ -24,7 +25,7 @@ export class InputFormComponent implements OnInit {
   constructor(private _dataNavService: DataNavService) {
     this.xAxis = null;
     this.dataSetName = null;
-    this.dataSets = null;
+    this.dataSets = [];
     this.newData = null;
     this.newLabel = null;
     this.newDataArray = [null];
@@ -61,5 +62,16 @@ export class InputFormComponent implements OnInit {
 
     this.dataSets.unshift(this.newSet);
     this._dataNavService.emitData(this.dataSets);
+  }
+
+  genRandomSet() {
+    this.newData = `${this.genRandomData()},${this.genRandomData()},${this.genRandomData()},${this.genRandomData()},${this.genRandomData()}`
+    this.dataSetName = `Random Set`;
+    this.newLabel = "Series 1";
+    this.xAxisInput = "1,2,3,4,5"
+  }
+
+  genRandomData(){
+    return Math.trunc(Math.random()*100);
   }
 }

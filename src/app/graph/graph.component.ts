@@ -16,7 +16,7 @@ export class GraphComponent implements DoCheck {
   activeSet: number;
   public context: CanvasRenderingContext2D;
   myChart: any;
-  chartSeries: Array<any>
+  chartxAxis: Array<any>
   chartData: Array<any>;
   chartLabel: Array<string>;
   chart1: any;
@@ -25,9 +25,8 @@ export class GraphComponent implements DoCheck {
 
 
   constructor(private _dataNavService: DataNavService) {
-     this._dataNavService.activeDataSet.subscribe(activeDataSet => {
-       this.activeSet = activeDataSet;
-      console.log("active data Set ->" , activeDataSet)
+    this._dataNavService.activeDataSet.subscribe(activeDataSet => {
+      this.activeSet = activeDataSet;
       this.changer = null;
     })
 
@@ -38,7 +37,7 @@ export class GraphComponent implements DoCheck {
       this.chartLabel = dataSets.map((item: any, i: number) => {
         return item.data.label;
       });
-      this.chartSeries = dataSets.map((item: any, i: number) => {
+      this.chartxAxis = dataSets.map((item: any, i: number) => {
         return item.xAxis;
       });
       this.dataSetName = dataSets[this.activeSet].dataSetName;
@@ -70,17 +69,21 @@ export class GraphComponent implements DoCheck {
       type: 'line',
       // The data for our dataset
       data: {
-        labels: this.chartSeries[this.activeSet],
+        labels: this.chartxAxis[this.activeSet],
         datasets: [{
           label: this.chartLabel[this.activeSet],
-          backgroundColor: 'rgb(255, 99, 132)',
-          borderColor: 'rgb(255, 99, 132)',
+          backgroundColor: 'rgba(148,159,177,0.2)',
+          borderColor: 'rgba(148,159,177,1)',
+          pointBackgroundColor: 'rgba(148,159,177,1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(148,159,177,0.8)',
           data: this.chartData[this.activeSet],
         }]
       },
       // Configuration options go here
       options: {
-        
+
       }
     });
   }
