@@ -18,6 +18,7 @@ export class InfoComponent implements OnInit, DoCheck {
   chartLabel: Array<string>;
   chart2: any;
   changer: any;
+  dataSetName: string;
 
   constructor(private _dataNavService: DataNavService) {
     this._dataNavService.activeDataSet.subscribe(activeDataSet => {
@@ -36,6 +37,7 @@ export class InfoComponent implements OnInit, DoCheck {
       this.chartxAxis = dataSets.map((item: any, i: number) => {
         return item.xAxis;
       });
+      this.dataSetName = dataSets[this.activeSet].dataSetName;
     })
   }
 
